@@ -189,6 +189,7 @@ class SessionList(tk.Frame):
         # data table
         # get all server ip
         self.server = os.listdir(f"logs\\{value}")
+        print("45==", self.server)
 
         stat = ["pass", "fiald"]
         error = ["NA", "Connection Error", "Authentication Error", "Other"]
@@ -245,10 +246,12 @@ class ResultAnalysia(tk.Frame):
         self.btn_height = 150
 
         # All session list
-        self.session_list = os.listdir("logs")
+        self.session_lists = os.listdir("logs")
 
         # get all server ip
-        self.server = os.listdir("logs\\{}".format(self.session_list[0]))
+        self.server = os.listdir("logs\\{}".format(self.session_lists[0]))
+        print("Line 252: ", "logs\\{}".format(self.session_lists[0]))
+        print("Line 253: ", self.server)
 
 
         # Create a main frame
@@ -289,7 +292,7 @@ class ResultAnalysia(tk.Frame):
         # Fetching Server List from File
 
         self.cmd = [i.replace(".TXT", "")
-               for i in os.listdir(r"logs\{}\{}\pre".format(self.session_list[0], self.server[0]))]
+               for i in os.listdir(r"logs\{}\{}\pre".format(self.session_lists[0], self.server[0]))]
 
         for line in self.cmd:
             self.server_list.insert(END, line.strip())
