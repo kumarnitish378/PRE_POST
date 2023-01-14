@@ -14,6 +14,7 @@ from PIL import ImageTk, Image
 from threading import Thread
 from random import randint, choice
 import mypackadge.VARIABLES as var
+from mypackadge.create_session import SessionCreate
 import csv
 import pandas as pd
 
@@ -335,6 +336,9 @@ class AddServer(tk.Frame):
         self.btn_width = 150
         self.btn_height = 150
 
+        self.default_user = "pi"
+        self.default_pass = "pi1"
+
         # All session list
         self.session_list = os.listdir("logs")
 
@@ -349,8 +353,8 @@ class AddServer(tk.Frame):
         self.session_entry = Entry(self.Edit_frame, text=var.EDIT_SERVER_ID, font=font)
         self.session_entry.grid(row=2, column=0)
 
-        self.session_des = Label(self.Edit_frame, text="Description", font=font)
-        self.session_des.grid(row=3, column=0)
+        # self.session_des = Label(self.Edit_frame, text="Description", font=font)
+        # self.session_des.grid(row=3, column=0)
 
         self.session_des = Entry(self.Edit_frame, text=var.EDIT_SERVER_ID, font=font)
         self.session_des.grid(row=4, column=0)
@@ -359,8 +363,8 @@ class AddServer(tk.Frame):
                                 bg="#02FFFF", font=font, command=self.session_create)
         self.add.grid(row=7, column=0, pady=10, padx=10)
 
-        self.cal = Button(self.Edit_frame, text="Cancel", width=20, font=font,
-                        border=0, bg="#F20F00", command=self.cancel_cmd)
+        self.cal = Button(self.Edit_frame, text="Next", width=20, font=font,
+                        border=0, bg="#00e3f2", command=self.cancel_cmd)
         self.cal.grid(row=9, column=0, pady=10, padx=10)
 
         self.home = Button(self.Edit_frame, text="Home", width=20, font=font,
@@ -383,17 +387,16 @@ class AddServer(tk.Frame):
     
     def save_text(self):
         txt = self.txtbox.get("1.0", tk.END)
-        print(f"Lenght of List: ", len(txt))
-        if len(txt) <= 1:
-            return False
-        
-        with open(f"server_lists/{self.session_entry.get()}/servers.csv", "w") as f:
-            f.write(self.header)
-        with open(f"server_lists/{self.session_entry.get()}/servers.csv", "a") as f:
-            f.write(txt)
-            # my_logger("Saved server list: {}".format)
-            return True
+        print(txt)
+        ser_list = txt.split("\n")
+        all_server = []
+        print("Split Server: ", ser_list)
 
+        a = SessionCreate(data=ser_list)
+        of = a.save_sassion(file_path=f"server_lists/{self.session_entry.get()}/servers.csv")
+        a.create_folders(self.session_entry.get())
+        return of
+        
     
     def cancel_cmd(self):
         self.controller.show_frame(4)
@@ -415,7 +418,9 @@ class AddServer(tk.Frame):
                         self.controller.show_frame(3)
 
                 except Exception as e:
-                    messagebox.showinfo("Session ERROR", f"Error in Create Session: {e}")   
+                    messagebox.showinfo("Session ERROR", f"Error in Create Session: {e}")
+                    # os.rmdir(f"logs/{self.session_entry.get()}")
+                    # os.rmdir(f"server_lists/{self.session_entry.get()}")   
                     self.controller.show_frame(3)
             else:
                 messagebox.showinfo("Sesion", f"Session Found: {self.session_entry.get()}")   
@@ -424,72 +429,9 @@ class AddServer(tk.Frame):
             messagebox.showinfo("Session", f"Session Error: Empty Sesion Name")   
             self.controller.show_frame(3)
 
-
 class AddServerIp(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-
-        main_frame_bg = "#225FDD" #"#010530"
-        login_section_bg = "#3400f0"
-        font_color = "#01011f" #"#E1341E"
-
-        self.controller = controller
-        self.configure(bg='#f0f0f0')
-        self.rowconfigure(0, weight=1)
-        self.columnconfigure(0, weight=1)
-        font = tkFont.Font(family="Helvetica", size=20, weight="bold")
-        font1 = tkFont.Font(family="Helvetica", size=14, weight="bold")
-
-        # 3. Text Editor----------------------------------------------------
-        # Button Frame
-        self.buttons_frame = tk.Frame(self)
-        self.buttons_frame.grid(row=0, column=0, sticky=W+E)    
-
-        self.btn_Image = tk.Button(self.buttons_frame, text='Save',
-                                font=font1, width=8,
-                                bg="#00D2FF", fg="black", border=0,
-                                command=self.save_text
-                                )
-        self.btn_Image.grid(row=0, column=0, padx=10, pady=10)
-
-        self.btn_Folder = tk.Button(self.buttons_frame, text='Back',
-                                font=font1, width=8,
-                                bg="#00D2FF", fg="black", border=0,
-                                command=self.prev_page
-                                )
-        self.btn_Folder.grid(row=0, column=2, padx=10, pady=10)
-
-        # Group1 Frame ----------------------------------------------------
-        self.group1 = tk.LabelFrame(self, text="Text Box", padx=5, pady=5)
-        self.group1.grid(row=1, column=0, columnspan=3, padx=10, pady=10, sticky=E+W+N+S)
-
-        self.columnconfigure(0, weight=1)
-        self.rowconfigure(1, weight=1)
-
-        self.group1.rowconfigure(0, weight=1)
-        self.group1.columnconfigure(0, weight=1)
-
-        # Create the textbox
-        self.txtbox = scrolledtext.ScrolledText(self.group1, width=40, height=13,
-                                        font=font
-                                        )
-        self.txtbox.grid(row=0, column=0,   sticky=E+W+N+S)
-        with open("server_list.txt", "r") as f:
-            for line in f:
-                if line.strip():
-                    self.txtbox.insert(tk.END, line)
-
-    def save_text(self):
-        txt = self.txtbox.get("1.0", tk.END)
-        with open("server_list.txt", "w") as f:
-            f.write(txt)
-            print("Saved server list: {}".format)
-        self.btn_Image.configure(text="Saved")
-        pass
-
-    def prev_page(self):
-        self.controller.show_frame(4)
-        print("Backed")
 
 
 class MainWindow(tk.Tk):
@@ -510,7 +452,7 @@ class MainWindow(tk.Tk):
 
         self.frames = {}
         self.fl = []
-        for F in (AddServer, PageThree, ViewServer, AddServerIp):
+        for F in (AddServer, PageThree, ViewServer):
             frame = F(container, self)
             # self.frames[F] = frame
             self.fl.append(frame)

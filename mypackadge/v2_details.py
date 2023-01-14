@@ -140,7 +140,7 @@ class SessionList(tk.Frame):
             print(line)
             self.session_list.insert(END, line.strip())
 
-        self.next = Button(self, text="Home", width=20, border=0, bg="#524136", height=20,
+        self.next = Button(self, text="Home", width=20, border=0, bg="#00e3f2", height=20,
                         command=lambda : self.controller.show_frame(0))
         self.next.pack(pady=20, side=LEFT)
             
