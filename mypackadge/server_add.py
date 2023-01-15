@@ -113,7 +113,6 @@ class PageThree(tk.Frame):
         self.btn_height = 150
 
         # Session List ============= 
-        self.sessions = os.listdir("server_lists")
         self.sframe = Frame(self)
         self.sframe.pack(pady=20, padx=5, side=LEFT)
 
@@ -135,6 +134,7 @@ class PageThree(tk.Frame):
         self.session_list.config(yscrollcommand=scr.set)
         # Fetching Server List from File
 
+        self.sessions = os.listdir("server_lists")
         for line in self.sessions:
             print(line)
             self.session_list.insert(END, line.strip())
@@ -180,7 +180,8 @@ class PageThree(tk.Frame):
                                             width=30, font=out_font)
         self.mess_label.grid(row=11, column=0)
 
-        self.refresh = Button(self.Edit_frame, text="Refresh", width=20, border=0, bg="#02FFFF", font=font)
+        self.refresh = Button(self.Edit_frame, text="Refresh", width=20, border=0,
+                                bg="#02FFFF", font=font, command=self.update_session)
         self.refresh.grid(row=12, column=0, pady=10, padx=10)
 
         self.edit = Button(self.Edit_frame, text="Edit", width=20, border=0, bg="#02FFFF", font=font)
@@ -211,6 +212,14 @@ class PageThree(tk.Frame):
 
     def home(self):
         self.controller.show_frame(0)
+
+    
+    def update_session(self):
+        self.sessions = os.listdir("server_lists")
+        self.session_list.delete(0, tk.END)
+        for line in self.sessions:
+            print(line)
+            self.session_list.insert(END, line.strip())
 
         
     def OnDoubleClick(self, event):
@@ -400,6 +409,7 @@ class AddServer(tk.Frame):
     
     def cancel_cmd(self):
         self.controller.show_frame(4)
+
 
     def session_create(self):
         session_list = os.listdir("logs")

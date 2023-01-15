@@ -171,10 +171,10 @@ class MainPage(tk.Frame):
         self.remove.grid(row=1, column=2, sticky=W, pady=self.ypad, padx=self.xpad)
 
 
-        # # Button 7
-        # self.add_remove = Button(self.control_frame, image=self.photoimage, bg=self.border,
-        #              border=2, width=self.btn_width, height=self.btn_height)
-        # self.add_remove.grid(row=2, column=0, sticky=W, pady=self.ypad, padx=self.xpad)
+        # Button 7
+        self.add_remove = Button(self.control_frame, image=self.photoimage, bg=self.border,
+                     border=2, width=self.btn_width, height=self.btn_height)
+        self.add_remove.grid(row=2, column=0, sticky=W, pady=self.ypad, padx=self.xpad)
 
         # Banner
         self.message = Label(self.control_frame, image=img, width=640, height=90, border=2)

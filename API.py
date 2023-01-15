@@ -1,7 +1,15 @@
-import requests
+hindi = """
+मैं भारत से प्यार करता हूँ 
+ 
+गुरुदेव रवींद्र नाथ ठाकुर भारत के बँगला साहित्य के शिरोमणि कवि थे. 
+ 
+उनकी कविता में प्रकृति के सौंदर्य और कोमलतम मानवीय भावनाओं का उत्कृष्ट चित्रण है. 
+ 
+"जन गण मन"  उनकी रचित एक विशिष्ट कविता है जिसके प्रथम छंद को हमारे राष्ट्रीय गीत होने का गौरव प्राप्त है. 
+ 
+गणतंत्र दिवस के शुभ अवसर पर, काव्यालय की ओर से, आप सबको यह कविता अपने मूल बंगला रूप में प्रस्तुत है
+"""
 
-api_url = 'https://api.api-ninjas.com/v1/facedetect'
-image_file_descriptor = open('IMG20220710140357.jpg', 'rb')
-files = {'image': image_file_descriptor}
-r = requests.post(api_url, files=files)
-print(r.json())
+print(hindi.split())
+if hindi.split()[0] == "मैं":
+    print("मैं Hum Don सोग ूद लोगप")

@@ -113,7 +113,6 @@ class SessionList(tk.Frame):
         self.btn_height = 150
 
         # Session List ============= 
-        self.sessions = os.listdir("logs")
         self.sframe = Frame(self)
         self.sframe.pack(pady=20, padx=50, side=LEFT)
 
@@ -136,13 +135,18 @@ class SessionList(tk.Frame):
         self.session_list.config(yscrollcommand=scr.set)
         # Fetching Server List from File
 
+        self.sessions = os.listdir("logs")
         for line in self.sessions:
-            print(line)
             self.session_list.insert(END, line.strip())
 
-        self.next = Button(self, text="Home", width=20, border=0, bg="#00e3f2", height=20,
+        self.next = Button(self, text="Home", width=20, border=0, bg="#00e3f2", height=5,
                         command=lambda : self.controller.show_frame(0))
         self.next.pack(pady=20, side=LEFT)
+
+        self.refresh = Button(self, text="Refresh", width=20, border=0, bg="#00e3f2", height=5,
+                        command=self.update_session)
+
+        self.refresh.pack(pady=20, side=LEFT)
             
         # Sessin Details ============
         self.frame = Frame(self)
@@ -171,7 +175,6 @@ class SessionList(tk.Frame):
         print(city)                    # Get city
         outputStr = "{0} : {1}".format(state,city)        # Formatting
         var.SERVER = city[1]
-        print(var.SERVER)
         # messagebox.showinfo("Double Clicked",outputStr)   
         self.controller.show_frame(2)
     
@@ -213,6 +216,12 @@ class SessionList(tk.Frame):
 
         # self.tv.bind('<<TreeviewSelect>>', self.OnDoubleClick)
         self.tv.bind('<Double-1>', self.OnDoubleClick)
+
+    def update_session(self):
+        self.sessions = os.listdir("logs")
+        self.session_list.delete(0, tk.END)
+        for line in self.sessions:
+            self.session_list.insert(END, line.strip())
 
 
 class ResultAnalysia(tk.Frame):
