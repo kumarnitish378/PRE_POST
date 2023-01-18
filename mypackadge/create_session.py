@@ -1,6 +1,7 @@
 import pandas as pd
 import os
 import csv
+import json
 
 
 class SessionCreate:
@@ -8,8 +9,12 @@ class SessionCreate:
         self.data = data
         # ["ip","username","password"]
         self.all_server = {}
-        self.default_user = "pi"
-        self.default_pass = "pi1"
+        
+        with open("settings/configure.json", 'r') as f:
+            default = json.load(f)
+        
+        self.default_user = default["default_user"]
+        self.default_pass = default["default_pass"]
 
         self.ip = []
         self.user_name = []

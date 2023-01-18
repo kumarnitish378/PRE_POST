@@ -18,7 +18,7 @@ from random import randint
 
 # Class for connecting to a remote host and executing commands
 class RemoteHost(Thread):
-    def __init__(self, host, username, password, command_list_path="", multiT=False):
+    def __init__(self, host, username, password, session_name, mode_name, command_list_path="", multiT=False):
         Thread.__init__(self)
         self.check_con_ = False
         self.host = host
@@ -27,6 +27,8 @@ class RemoteHost(Thread):
         self.ssh = SSHClient()
         self.ssh.set_missing_host_key_policy(AutoAddPolicy())
         self.com_list_path = command_list_path
+        self.session_name = session_name
+        self.mode_name = mode_name 
 
         self.multiT = multiT
         self.result = {}
@@ -71,13 +73,14 @@ class RemoteHost(Thread):
                 f.write("ERROR :: \nCould not connect to host From Execute: " + self.host)
                 f.write("\n")
             return False
+        
         for command in self.command_list:
             out = self.execute_command(command)
             self.result[command] = out
             print("COMMAND: ", command)
             # print(out[0])
             # print(out[1])
-            with open("result_folder/{}.txt".format(na), 'a') as f:
+            with open(f"logs/{self.session_name}/{self.mode_name}/{self.host}/{command.upper()}.txt".format(na), 'a') as f:
                 f.write(command)
                 f.write("{}".format(out[0]))
                 f.write("{}".format(out[1]))
@@ -106,8 +109,8 @@ if __name__ == "__main__":
         # res = remote_host.execute_all_command()
         # print(res)
         
-        print("clossing... the connection")
-        remote_host.close()
-        print("Connection closed")
+        # print("clossing... the connection")
+        # remote_host.close()
+        # print("Connection closed")
 
 

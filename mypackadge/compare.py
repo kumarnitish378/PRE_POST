@@ -10,12 +10,13 @@ POST = r"logs\session_1\192.168.5.1\post"
 RES = r"logs\session_1\192.168.5.1\res"
 RT = r"logs\\session_1\\192.168.5.1\\"
 
-ig_cmd = [cmd.replace("\n", "") for cmd in open("cmd_ignore.txt").readlines()]
+ig_cmd = [cmd.replace("\n", "") for cmd in open("settings/cmd_ignore.txt").readlines()]
 print(ig_cmd)
 
 pre_files = [PRE + "/" + i for i in  os.listdir(ROOT + PRE)]
 post_files = [POST + "/" + i for i in  os.listdir(ROOT + POST)]
 ignore_files = []
+
 
 if pre_files.__len__() != post_files.__len__():
     print("There is some file missing in folder.")

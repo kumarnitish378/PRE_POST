@@ -53,13 +53,13 @@ class IngnoreTextEditor(tk.Frame):
 
     def open_file(self):
         # filepath = filedialog.askopenfilename()
-        with open("cmd_ignore.txt", 'r') as f:
+        with open("settings/cmd_ignore.txt", 'r') as f:
             data = f.read()
             self.text_area.insert(tk.END, data)
 
     def save_file(self, event=None):
         # filepath = filedialog.asksaveasfilename()
-        with open("cmd_ignore.txt", 'w') as f:
+        with open("settings/cmd_ignore.txt", 'w') as f:
             data = self.text_area.get(1.0, tk.END)
             f.write(data)
             self.save_flag = True

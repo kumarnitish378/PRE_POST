@@ -17,7 +17,7 @@ from random import randint, choice
 import mypackadge.VARIABLES as var
 import csv
 
-global server_name
+
 server_name = ""
 
 # https://apidemos.com/tkinter/tkinter-progressbar/tkinter-progressbar-start-step-stop-method.html
@@ -92,7 +92,8 @@ class SessionList(tk.Frame):
         main_frame_bg = "#ffffff"  # "#010530"
         login_section_bg = "#3400f0"
         font_color = "#01011f"  # "#E1341E"
-        global server_name
+        self.server_name = ""
+        self.server_ip = ""
 
         self.controller = controller
         self.configure(bg=main_frame_bg)
@@ -146,7 +147,7 @@ class SessionList(tk.Frame):
         self.refresh = Button(self, text="Refresh", width=20, border=0, bg="#00e3f2", height=5,
                         command=self.update_session)
 
-        self.refresh.pack(pady=20, side=LEFT)
+        self.refresh.pack(pady=20, padx=10, side=LEFT)
             
         # Sessin Details ============
         self.frame = Frame(self)
@@ -175,6 +176,7 @@ class SessionList(tk.Frame):
         print(city)                    # Get city
         outputStr = "{0} : {1}".format(state,city)        # Formatting
         var.SERVER = city[1]
+        self.server_ip = city[1]
         # messagebox.showinfo("Double Clicked",outputStr)   
         self.controller.show_frame(2)
     
@@ -189,6 +191,7 @@ class SessionList(tk.Frame):
         value = w.get(index)
         print('You selected item "%s"' % (value))
         var.SESSION = value
+        self.server_name = value
         # data table
         # get all server ip
         self.server = os.listdir(f"logs\\{value}")
@@ -231,7 +234,6 @@ class ResultAnalysia(tk.Frame):
         main_frame_bg = "#ffffff"  # "#010530"
         login_section_bg = "#3400f0"
         font_color = "#01011f"  # "#E1341E"
-        global server_name
 
         w = self.winfo_screenwidth() -40
         h = self.winfo_screenheight() -40
@@ -300,8 +302,11 @@ class ResultAnalysia(tk.Frame):
         self.server_list.config(yscrollcommand=scr.set)
         # Fetching Server List from File
 
+        # self.cmd = [i.replace(".TXT", "")
+        #        for i in os.listdir(r"logs\{}\{}\pre".format(self.session_lists[0], self.server[0]))]
         self.cmd = [i.replace(".TXT", "")
                for i in os.listdir(r"logs\{}\{}\pre".format(self.session_lists[0], self.server[0]))]
+        print("Line 305: ", self.cmd)
 
         for line in self.cmd:
             self.server_list.insert(END, line.strip())
@@ -323,9 +328,19 @@ class ResultAnalysia(tk.Frame):
         
         self.sr_name = Label(self.command_frame, text="", font=font)
         self.sr_name.grid(row=3, column=0, pady=1)
+    
+    def on_refresh(self, session_name, server_ip):
+        print("Selected Server: ", session_name, server_ip)
+        self.cmd = [i.replace(".TXT", "")
+               for i in os.listdir(r"logs\{}\{}\pre".format(session_name, server_ip))]
+        self.server_list.delete(0,END)
+        for line in self.cmd:
+            self.server_list.insert(END, line.strip())
+
 
 
     def search_cmd(self, evt):
+        print("SessionNameFromResultClass: ", server_name)
         self.e_text=self.search.get().upper()
         # print("Data: ",self.cmd, self.e_text)
         self.result = []
@@ -421,7 +436,7 @@ class ResultAnalysia(tk.Frame):
         if self.confirm("Are you sure you want to exit?"):
             # my_logger("Exit Tool: Yes")
             # self.controller.destroy()
-            self.controller.show_frame(0)
+            self.controller.show_frame(1)
             print("Exit Tool")
         else:
             # my_logger("Exit Tool: No")

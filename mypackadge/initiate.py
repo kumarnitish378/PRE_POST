@@ -16,6 +16,7 @@ from random import randint, choice
 import mypackadge.VARIABLES as var
 import csv
 import pandas as pd
+from mypackadge import utils
 
 
 server_name = ""
@@ -183,16 +184,42 @@ class InitTest(tk.Frame):
 
 
     def start(self):
-        print("Hello Start")
+        option = self.selected.get()
+        if "Select" in option:
+            messagebox.showerror("Method Error", "No Option selected")
+        else:
+            if len(self.session_list.curselection()) != 0:
+                print("Active Sessin: ", self.session_list.curselection())
+                sess = self.sessions[self.session_list.curselection()[0]]
+                print("Selected option:", option)
+                print("Hello Start", sess)
+
+                # Read All Ip from the Server list by session name
+                servers = pd.read_csv(f"server_lists/{sess}/servers.csv")
+                print(servers.head(5))
+                for host, username, password in zip(servers["ip"], servers["username"], servers["password"]):
+                    print(type(host), type(username), type(password))
+                    remote_host = RemoteHost(host, username, password, sess, option,
+                                    command_list_path="settings/command_list.txt")
+                    remote_host.start()
+                    print("Connected to host: " + host)
+            else:
+                messagebox.showerror("Session Error", "No Session selected")
+
+
+
 
     def start_all(self):
         print("Hello start all")
+        messagebox.showinfo("showinfo", "Need To Implements")
 
     def stop(self):
         print("Hello stop")
+        messagebox.showinfo("showinfo", "Need To Implements")
 
     def stop_all(self):
         print("Hello stop all")
+        messagebox.showinfo("showinfo", "Need To Implements")
     
     def return_to_home(self):
         print("Going To Home Page")

@@ -249,6 +249,8 @@ class MainWindow(tk.Tk):
 
     def show_frame(self, cont):
         frame = self.fl[cont]
+        if cont == 2:
+            frame.on_refresh(self.fl[1].server_name, self.fl[1].server_ip)
         frame.tkraise()
 
 

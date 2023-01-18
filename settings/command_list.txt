@@ -34,6 +34,7 @@ ps -ef
 iptables -L
 systemctl status nfs
 systemctl status ntpd
+sftp pi@172.16.6
 
 
 

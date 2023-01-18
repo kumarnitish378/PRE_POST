@@ -1,5 +1,0 @@
-self.controller.show_frame(0)
-self.controller.show_frame(0)
-self.controller.show_frame(0)
-self.controller.show_frame(0)
-self.controller.show_frame(0)
