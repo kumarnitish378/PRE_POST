@@ -362,8 +362,8 @@ class AddServer(tk.Frame):
         self.session_entry = Entry(self.Edit_frame, text=var.EDIT_SERVER_ID, font=font)
         self.session_entry.grid(row=2, column=0)
 
-        # self.session_des = Label(self.Edit_frame, text="Description", font=font)
-        # self.session_des.grid(row=3, column=0)
+        self.session_des = Label(self.Edit_frame, text="Description", font=font)
+        self.session_des.grid(row=3, column=0)
 
         self.session_des = Entry(self.Edit_frame, text=var.EDIT_SERVER_ID, font=font)
         self.session_des.grid(row=4, column=0)
@@ -396,15 +396,18 @@ class AddServer(tk.Frame):
     
     def save_text(self):
         txt = self.txtbox.get("1.0", tk.END)
-        print(txt)
-        ser_list = txt.split("\n")
-        all_server = []
-        print("Split Server: ", ser_list)
+        print("IP: ", txt, f"len: {len(txt)}")
+        if len(txt) > 1:
+            ser_list = txt.split("\n")
+            all_server = []
+            print("Split Server: ", ser_list)
 
-        a = SessionCreate(data=ser_list)
-        of = a.save_sassion(file_path=f"server_lists/{self.session_entry.get()}/servers.csv")
-        a.create_folders(self.session_entry.get())
-        return of
+            a = SessionCreate(data=ser_list)
+            of = a.save_sassion(file_path=f"server_lists/{self.session_entry.get()}/servers.csv")
+            a.create_folders(self.session_entry.get())
+            return of
+        else:
+            return False
         
     
     def cancel_cmd(self):

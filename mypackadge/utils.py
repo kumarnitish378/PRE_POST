@@ -80,7 +80,7 @@ class RemoteHost(Thread):
             print("COMMAND: ", command)
             # print(out[0])
             # print(out[1])
-            with open(f"logs/{self.session_name}/{self.mode_name}/{self.host}/{command.upper()}.txt".format(na), 'a') as f:
+            with open(f"logs/{self.session_name}/{self.host}/{self.mode_name}/{self.host}/{command.upper()}.txt".format(na), 'a') as f:
                 f.write(command)
                 f.write("{}".format(out[0]))
                 f.write("{}".format(out[1]))

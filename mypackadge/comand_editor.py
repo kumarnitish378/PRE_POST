@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import filedialog, Text
 import tkinter.messagebox as messagebox
 import tkinter.font as tkFont
+from tkinter.messagebox import askyesno
 
 
 class CommandTextEditor(tk.Frame):
@@ -57,6 +58,12 @@ class CommandTextEditor(tk.Frame):
             data = f.read()
             self.text_area.insert(tk.END, data)
 
+    def on_refresh(self):
+        self.text_area.delete("1.0", "end")
+        with open("settings/command_list.txt", 'r') as f:
+            data = f.read()
+            self.text_area.insert(tk.END, data)
+
     def save_file(self, event=None):
         # filepath = filedialog.asksaveasfilename()
         with open("settings/command_list.txt", 'w') as f:
@@ -72,7 +79,14 @@ class CommandTextEditor(tk.Frame):
             self.controller.show_frame(0)
         else:
             # data has not been saved, show a warning message
-            tk.messagebox.showwarning("Warning", "Please save your changes")
+            # tk.messagebox.showwarning("Warning", "Please save your changes")
+            answer = askyesno(title='Discard Change ?',
+                        message='Are you sure?')
+            
+            if answer:
+                self.controller.show_frame(0)
+            else:
+                pass
     
     def save_chacker(self, event=None):
         self.save_flag = False

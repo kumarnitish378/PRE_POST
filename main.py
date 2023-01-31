@@ -247,10 +247,19 @@ class MainWindow(tk.Tk):
             frame.grid(row=0, column=0, sticky="nsew")
         self.show_frame(7)
 
+
     def show_frame(self, cont):
         frame = self.fl[cont]
         if cont == 2:
             frame.on_refresh(self.fl[1].server_name, self.fl[1].server_ip)
+        if cont == 9:
+            frame.on_refresh()
+        if cont == 10:
+            frame.on_refresh()
+        if cont == 4:
+            frame.update_session()
+        if cont == 1:
+            frame.update_session()
         frame.tkraise()
 
 

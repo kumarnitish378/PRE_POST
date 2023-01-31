@@ -1,5 +1,1 @@
-ETC_FILES-TIMESTAMP
-CPUINFO
-ls -la
-ls -la /ttyUSB*
-ssh pi@172.16.5.96
+hostname -I
