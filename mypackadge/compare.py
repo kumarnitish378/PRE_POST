@@ -5,10 +5,10 @@ import sys
 mode = input("Enter the mode: ")
 
 ROOT = ""
-PRE = r"logs\session_1\192.168.5.1\pre"
-POST = r"logs\session_1\192.168.5.1\post"
-RES = r"logs\session_1\192.168.5.1\res"
-RT = r"logs\\session_1\\192.168.5.1\\"
+PRE = "logs/nitish_kumar/192.168.1.45/pre"
+POST = "logs/nitish_kumar/192.168.1.45/post"
+RES = "logs/nitish_kumar/192.168.1.45/res"
+RT = "logs/nitish_kumar/192.168.1.45/"
 
 ig_cmd = [cmd.replace("\n", "") for cmd in open("settings/cmd_ignore.txt").readlines()]
 print(ig_cmd)
@@ -75,7 +75,7 @@ if mode.lower() == "hard":
             success_falg = False if post.split(".")[0] not in ig_cmd else True
         index += 1
         open(f"{RT}resut.txt", 'w').write("Success") if success_falg else open(f"{RT}resut.txt", 'w').write("Faild")
-
+        print("Save Result in the result.txt file")
 
 elif mode.lower() == "soft":
     compare_result = [["Sn", "pre test", "post test", "result", "result_2", "error", "error_line"]]

@@ -1,1 +1,0 @@
-/tmp/main.sh: line 161: ntpq: command not found

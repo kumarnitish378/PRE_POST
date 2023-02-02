@@ -1,0 +1,12 @@
+df__hTSTDOUT: 
+Filesystem     Type      Size  Used Avail Use% Mounted on
+/dev/root      ext4       29G  6.2G   22G  23% /
+devtmpfs       devtmpfs  1.8G     0  1.8G   0% /dev
+tmpfs          tmpfs     1.9G     0  1.9G   0% /dev/shm
+tmpfs          tmpfs     768M  1.2M  767M   1% /run
+tmpfs          tmpfs     5.0M  4.0K  5.0M   1% /run/lock
+/dev/mmcblk0p1 vfat      255M   51M  205M  20% /boot
+tmpfs          tmpfs     384M   20K  384M   1% /run/user/1000
+STDERR: 
+
+-----------------------------

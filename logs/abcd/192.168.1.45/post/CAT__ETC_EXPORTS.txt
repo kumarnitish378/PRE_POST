@@ -1,0 +1,5 @@
+cat__etc_exportsSTDOUT: 
+STDERR: 
+cat: /etc/exports: No such file or directory
+
+-----------------------------

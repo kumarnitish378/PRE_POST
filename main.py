@@ -260,6 +260,8 @@ class MainWindow(tk.Tk):
             frame.update_session()
         if cont == 1:
             frame.update_session()
+        if cont == 8:
+            frame.update_session()
         frame.tkraise()
 
 

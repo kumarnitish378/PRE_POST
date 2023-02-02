@@ -1,0 +1,33 @@
+ls__laSTDOUT: 
+total 220088
+drwxr-xr-x 17 pi   pi        4096 Jan 31 19:17 .
+drwxr-xr-x  3 root root      4096 Sep 22 06:04 ..
+-rw-------  1 pi   pi        2414 Feb  2 22:56 .bash_history
+-rw-r--r--  1 pi   pi         220 Sep 22 05:35 .bash_logout
+-rw-r--r--  1 pi   pi        3523 Sep 22 05:35 .bashrc
+-rw-r--r--  1 pi   pi         670 Jan 31 11:57 blink.py
+drwxr-xr-x  2 pi   pi        4096 Sep 22 05:44 Bookshelf
+drwxr-xr-x  7 pi   pi        4096 Jan 31 17:17 .cache
+drwx------  9 pi   pi        4096 Jan 31 17:17 .config
+drwxr-xr-x  2 pi   pi        4096 Sep 22 06:04 Desktop
+drwxr-xr-x  2 pi   pi        4096 Sep 22 06:04 Documents
+drwxr-xr-x  2 pi   pi        4096 Sep 22 06:04 Downloads
+drwxr-xr-x  2 pi   pi        4096 Jan 31 16:17 .keras
+drwxr-xr-x  5 pi   pi        4096 Jan 31 15:20 .local
+drwxr-xr-x  2 pi   pi        4096 Sep 22 06:04 Music
+drwxr-xr-x  2 pi   pi        4096 Sep 22 06:04 Pictures
+-rw-r--r--  1 pi   pi         807 Sep 22 05:35 .profile
+drwxr-xr-x  2 pi   pi        4096 Sep 22 06:04 Public
+-rw-------  1 pi   pi          87 Jan 31 16:53 .python_history
+drwxr-xr-x  2 pi   pi        4096 Sep 22 06:04 Templates
+-rw-r--r--  1 pi   pi   225255907 Jan 31 12:19 tensorflow-2.5.0-cp37-none-linux_armv7l.whl
+drwxr-xr-x  4 pi   pi        4096 Jan 31 16:17 tn
+drwxr-xr-x  2 pi   pi        4096 Sep 22 06:04 Videos
+drwx------  3 pi   pi        4096 Jan 31 11:36 .vnc
+-rw-r--r--  1 pi   pi         219 Jan 31 16:53 .wget-hsts
+-rw-------  1 pi   pi          49 Jan 31 19:17 .Xauthority
+-rw-------  1 pi   pi        2378 Jan 31 19:17 .xsession-errors
+-rw-------  1 pi   pi        2378 Jan 31 18:17 .xsession-errors.old
+STDERR: 
+
+-----------------------------

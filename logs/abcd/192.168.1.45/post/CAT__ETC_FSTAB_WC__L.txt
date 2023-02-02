@@ -1,0 +1,5 @@
+cat__etc_fstab_wc__lSTDOUT: 
+5
+STDERR: 
+
+-----------------------------

@@ -1,0 +1,5 @@
+hostnameSTDOUT: 
+test
+STDERR: 
+
+-----------------------------

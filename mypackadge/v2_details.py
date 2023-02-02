@@ -195,7 +195,7 @@ class SessionList(tk.Frame):
         # data table
         # get all server ip
         self.server = os.listdir(f"logs\\{value}")
-        print("45==", self.server)
+        print("45 == ", self.server)
 
         stat = ["pass", "fiald"]
         error = ["NA", "Connection Error", "Authentication Error", "Other"]
@@ -331,12 +331,11 @@ class ResultAnalysia(tk.Frame):
     
     def on_refresh(self, session_name, server_ip):
         print("Selected Server: ", session_name, server_ip)
-        self.cmd = [i.replace(".TXT", "")
-               for i in os.listdir(r"logs\{}\{}\pre".format(session_name, server_ip))]
+        self.cmd = [i.replace(".TXT", "").replace(".txt", "")
+               for i in os.listdir("logs/{}/{}/pre".format(session_name, server_ip))]
         self.server_list.delete(0,END)
         for line in self.cmd:
             self.server_list.insert(END, line.strip())
-
 
 
     def search_cmd(self, evt):
@@ -365,7 +364,7 @@ class ResultAnalysia(tk.Frame):
             value = w.get(index)
             # value = self.server_list.get(tk.ACTIVE)
             print('You selected command "%s"' % (value))
-            print("Selected Server: ", var.SERVER)
+            print("Selected Server in cmd_onselect: ", var.SERVER)
             self.sr_name.configure(text=var.SERVER)
             post_error = []
 

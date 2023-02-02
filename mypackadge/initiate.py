@@ -74,6 +74,7 @@ class InitTest(tk.Frame):
         self.session_list.config(yscrollcommand=scr.set)
         # Fetching Server List from File
 
+        # self.sessions = os.listdir("server_lists")
         for line in self.sessions:
             self.session_list.insert(END, line.strip())
         
@@ -92,16 +93,16 @@ class InitTest(tk.Frame):
                                     bg="#02FFFF", font=font, command=self.start)
         self.add.grid(row=1, column=0, pady=10, padx=10)
 
-        self.refresh = Button(self.Edit_frame, text="Stop", width=20, border=0, bg="#02FFFF",
+        self.refresh = Button(self.Edit_frame, text="View result", width=20, border=0, bg="#F20F00",
                                 font=font, command=self.stop)
         self.refresh.grid(row=2, column=0, pady=10, padx=10)
 
-        self.cal = Button(self.Edit_frame, text="Start All", width=20, font=font,
-                        border=0, bg="#F20F00", command=self.cancel_cmd)
-        self.cal.grid(row=3, column=0, pady=10, padx=10)
+        # self.cal = Button(self.Edit_frame, text="Start All", width=20, font=font,
+        #                 border=0, bg="#F20F00", command=self.cancel_cmd)
+        # self.cal.grid(row=3, column=0, pady=10, padx=10)
 
-        self.edit = Button(self.Edit_frame, text="Stop All", width=20, border=0, bg="#02FFFF",
-                            font=font, command=self.stop_all)
+        self.edit = Button(self.Edit_frame, text="Rfresh", width=20, border=0, bg="#F20F00",
+                            font=font, command=self.update_session)
         self.edit.grid(row=4, column=0, pady=10, padx=10)
 
         self.edit = Button(self.Edit_frame, text="Back", width=20, border=0, bg="#02FFFF",
@@ -211,7 +212,8 @@ class InitTest(tk.Frame):
 
     def start_all(self):
         print("Hello start all")
-        messagebox.showinfo("showinfo", "Need To Implements")
+        # messagebox.showinfo("showinfo", "Need To Implements")
+        self.controller.show_frame(1)
 
     def stop(self):
         print("Hello stop")
@@ -224,6 +226,12 @@ class InitTest(tk.Frame):
     def return_to_home(self):
         print("Going To Home Page")
         self.controller.show_frame(0)
+
+    def update_session(self):
+        self.sessions = os.listdir("server_lists")
+        self.session_list.delete(0, tk.END)
+        for line in self.sessions:
+            self.session_list.insert(END, line.strip())
 
 
 class MainWindow(tk.Tk):
