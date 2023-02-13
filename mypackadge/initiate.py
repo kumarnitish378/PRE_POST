@@ -93,7 +93,7 @@ class InitTest(tk.Frame):
                                     bg="#02FFFF", font=font, command=self.start)
         self.add.grid(row=1, column=0, pady=10, padx=10)
 
-        self.refresh = Button(self.Edit_frame, text="View result", width=20, border=0, bg="#F20F00",
+        self.refresh = Button(self.Edit_frame, text="View result", width=20, border=0, bg="#02FFFF",
                                 font=font, command=self.stop)
         self.refresh.grid(row=2, column=0, pady=10, padx=10)
 
@@ -217,7 +217,8 @@ class InitTest(tk.Frame):
 
     def stop(self):
         print("Hello stop")
-        messagebox.showinfo("showinfo", "Need To Implements")
+        # messagebox.showinfo("showinfo", "Need To Implements")
+        self.controller.show_frame(11)
 
     def stop_all(self):
         print("Hello stop all")

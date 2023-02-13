@@ -1,0 +1,8 @@
+Sn,pre test,post test,result,result_2,error
+0,CAT__ETC_EXPORTS.txt,CAT__ETC_EXPORTS.txt,success,1,0
+1,CAT__ETC_FSTAB.txt,CAT__ETC_FSTAB.txt,success,1,0
+2,CAT__ETC_FSTAB_WC__L.txt,CAT__ETC_FSTAB_WC__L.txt,success,1,0
+3,DF__HT.txt,DF__HT.txt,success,1,0
+4,DF__HT_WC__L.txt,DF__HT_WC__L.txt,success,1,0
+5,HOSTNAME.txt,HOSTNAME.txt,success,1,0
+6,LS__LA.txt,LS__LA.txt,success,1,0

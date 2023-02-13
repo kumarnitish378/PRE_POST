@@ -18,20 +18,14 @@ import mypackadge.VARIABLES as var
 import csv
 from tkinter import filedialog, Text
 from time import sleep
+from threading import Thread
 
 server_name = ""
 
-class Abcd:
-    def __init__(self):
-        pass
 
-    def get_data(self):
-        for i in range(100):
-            yield f"{i}\n"
-            sleep(0.1)
-
-class ComparePrePost:
+class ComparePrePost(Thread):
     def __init__(self, pre, post, res, rt, root=""):
+        Thread.__init__(self)
         self.root = root
         self.pre = pre
         self.post = post
@@ -42,8 +36,9 @@ class ComparePrePost:
         self.post_files = [self.post + "/" + i for i in  os.listdir(self.root + self.post)]
         self.ignore_files = []
 
+
     def setting_initial(self):
-        if pre_files.__len__() != self.post_files.__len__():
+        if self.pre_files.__len__() != self.post_files.__len__():
             print("There is some file missing in folder.")
             print(f"{self.pre_files.__len__()} Files in pre test but,")
             print(f"{self.post_files.__len__()} Files in post test")
@@ -72,18 +67,19 @@ class ComparePrePost:
                 print("post", self.post_files.index(igf))
                 self.post_files.pop(self.post_files.index(igf))
 
-        print(f"pre length: {self.pre_files.__len__()}")
+        print(f"pre length : {self.pre_files.__len__()}")
         print(f"post length: {self.post_files.__len__()}")
         if self.post_files.__len__() == 0:
             print("Ther is no files fo compare")
-            return "There is No File to compare"
-
+            # return "There is No File to compare"
 
     def compare_files(self):
         # Now Compareing The Files
+        print("Hello from compare function")
         compare_result = [["Sn", "pre test", "post test", "result", "result_2", "error"]]
         index = 0
         success_falg = True
+        print("In compare Function")
         for pre, post in zip(self.pre_files, self.post_files):
             with open(pre, "r") as pf:
                 # pre_read = "".join(sorted(pf.read()))
@@ -104,8 +100,22 @@ class ComparePrePost:
                 compare_result.append([index, pre.split("/")[-1], post.split("/")[-1], "filed", 0, 0])
                 success_falg = False if post.split(".")[0] not in ig_cmd else True
             index += 1
-            open(f"{RT}resut.txt", 'w').write("Success") if success_falg else open(f"{RT}resut.txt", 'w').write("Faild")
+            open(f"{self.rt}resut.txt", 'w').write("Success") if success_falg else open(f"{self.rt}resut.txt", 'w').write("Faild")
             print("Save Result in the result.txt file")
+        
+        # write result in csv file in result folder
+        with open(self.res+"/"+"result.csv", "w") as res_file:
+            writer = csv.writer(res_file)
+            writer.writerows(compare_result)
+            print("Result Saved In CSV File")
+
+
+    def run(self):
+        self.setting_initial()
+        print("calling")
+        for res in self.compare_files():
+            print(f"Result: {res}")
+        print("called")
 
 
 class SessionCompare(tk.Frame):
@@ -133,10 +143,11 @@ class SessionCompare(tk.Frame):
         self.xpad = 30
         self.border = "#00D2FF"
         self.select_session = False
+        self.session_name = ""
 
         self.btn_width = 150
         self.btn_height = 150
-
+        
         # Session List ============= 
         self.sframe = Frame(self)
         self.sframe.pack(pady=20, padx=50, side=LEFT)
@@ -148,7 +159,7 @@ class SessionCompare(tk.Frame):
                                    fg= "#000000", font=font_for_list, height=20, width=20)
         self.session_list.grid(row=1, column=0, padx=5, pady=20, rowspan=2, sticky=E+W+N+S)
         
-         
+        
         # Onselect Event
         self.session_list.bind('<<ListboxSelect>>', self.onselect)
 
@@ -196,11 +207,14 @@ class SessionCompare(tk.Frame):
         print(f"Selection by mouse: {w.curselection()}")
         if len(w.curselection()) == 0:
             return 0
+        
         index = int(w.curselection()[0])
         value = w.get(index)
+        self.session_name = value
         print('You selected item "%s"' % (value))
         var.SESSION = value
         self.server_name = value
+        self.select_session = True
         # data table
         # get all server ip
         self.server = os.listdir(f"logs\\{value}")
@@ -215,4 +229,27 @@ class SessionCompare(tk.Frame):
 
 
     def insert_log(self):
-        pass
+        """
+        ROOT = ""
+        PRE = "logs/nitish_kumar/192.168.1.45/pre"
+        POST = "logs/nitish_kumar/192.168.1.45/post"
+        RES = "logs/nitish_kumar/192.168.1.45/res"
+        self.root = "logs/nitish_kumar/192.168.1.45/"
+
+        pre, post, res, rt, root=""
+        """
+        if not self.select_session:
+            messagebox.showerror("Session Error", "No Session selected")
+        else:
+            print(f"Selected Session: {self.session_name} c")
+            print(f"Servers name: {self.server}")
+            for srv in self.server:
+                ab = ComparePrePost(f"logs/{self.session_name}/{srv}/pre",
+                                f"logs/{self.session_name}/{srv}/post",
+                                f"logs/{self.session_name}/{srv}/res",
+                                f"logs/{self.session_name}/{srv}/")
+                # ab.setting_initial()
+                # ab.compare_files()
+                ab.start()
+                print("Done!")
+            print("===========================")

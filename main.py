@@ -18,6 +18,7 @@ from mypackadge.v2_details import ResultAnalysia, SessionList
 from mypackadge.server_add import AddServer, PageThree, ViewServer, AddServerIp
 from mypackadge.ignore_error import IngnoreTextEditor
 from mypackadge.comand_editor import CommandTextEditor
+from mypackadge.session_compare import SessionCompare
 
 
 class Homepage(tk.Frame):
@@ -122,7 +123,7 @@ class MainPage(tk.Frame):
         self.reset_image = PhotoImage(file = "images/add_cmd.png")
         self.mode_image = PhotoImage(file = "images/ignore.png")
         self.remove_image = PhotoImage(file = "images/Exit.png")
-        self.remove_click_image = PhotoImage(file = "images/CLICK_REMOVE.png")
+        self.remove_click_image = PhotoImage(file = "images\CLICK_REMOVE.png")
 
 
         # Create 3 buttons 1. Previous 2.Next 3. Exit
@@ -172,8 +173,8 @@ class MainPage(tk.Frame):
 
 
         # Button 7
-        self.add_remove = Button(self.control_frame, image=self.photoimage, bg=self.border,
-                     border=2, width=self.btn_width, height=self.btn_height)
+        self.add_remove = Button(self.control_frame, image=self.remove_click_image, bg=self.border,
+                     border=2, width=self.btn_width, height=self.btn_height, command=lambda : self.controller.show_frame(11))
         self.add_remove.grid(row=2, column=0, sticky=W, pady=self.ypad, padx=self.xpad)
 
         # Banner
@@ -240,7 +241,7 @@ class MainWindow(tk.Tk):
 
         self.fl = []
         all_pages = (MainPage, SessionList, ResultAnalysia, AddServer, PageThree, ViewServer, 
-                        AddServerIp, Homepage, InitTest, CommandTextEditor, IngnoreTextEditor)
+                        AddServerIp, Homepage, InitTest, CommandTextEditor, IngnoreTextEditor, SessionCompare)
         for F in all_pages:
             frame = F(container, self)
             self.fl.append(frame)

@@ -140,14 +140,21 @@ class SessionList(tk.Frame):
         # get all server ip
         self.server = os.listdir(f"logs\\{value}")
         print("45 == ", self.server)
+        Errors = []
+        test_results = []
+        for resg in self.server:
+            with open(f"logs/{value}/{resg}/resut.txt") as f:
+                Errors.append(f.read())
+                test_results.append(f.read())
 
-        stat = ["pass", "fiald"]
-        error = ["NA", "Connection Error", "Authentication Error", "Other"]
+
+        # stat = ["pass", "fiald"]
+        # error = ["NA", "Connection Error", "Authentication Error", "Other"]
 
         serial_number = [i for i in range(1, 255)]
-        Errors = ["{}".format(choice(error)) for _ in range(1, 100)]
+        # Errors = ["{}".format(choice(error)) for _ in range(1, 100)]
 
-        test_results = ["{}".format(choice(stat)) for _ in range(1, 100)]
+        # test_results = ["{}".format(choice(stat)) for _ in range(1, 100)]
         # Clear list of server
         for item in self.tv.get_children():
             self.tv.delete(item)
