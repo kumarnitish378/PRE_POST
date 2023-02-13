@@ -11,7 +11,7 @@ class SessionCreate:
         self.all_server = {}
         
         with open("settings/configure.json", 'r') as f:
-            default = json.load(f)
+            default = json.load(f) 
         
         self.default_user = default["default_user"]
         self.default_pass = default["default_pass"]
@@ -64,7 +64,8 @@ class SessionCreate:
             os.mkdir(f"{rt}/{files}/res")
 
 
-if __name__ == "__name__":
+print(__name__)
+if __name__ == "__main__":
     ip_list = ['169.18.1.390,admini', '169.13.1.39,admini,root@123', 
         '169.15.1.39,admini,root@123', '169.171.39,pi1,root@123', '169.19.1.39,admini,root@12345', 
         '169.13.1.39,admini,root@123', '169.12.1.39,admini,root@123', '169.11.1.39,pi1,root@123', 

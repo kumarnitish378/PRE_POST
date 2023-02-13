@@ -1,0 +1,125 @@
+{
+    "response_code": 0,
+    "results": [
+        {
+            "category": "Geography",
+            "type": "multiple",
+            "difficulty": "hard",
+            "question": "In which city, is the Big Nickel located in Canada?",
+            "correct_answer": "Sudbury, Ontario",
+            "incorrect_answers": [
+                "Calgary, Alberta",
+                "Halifax, Nova Scotia ",
+                "Victoria, British Columbia"
+            ]
+        },
+        {
+            "category": "Sports",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "What is the nickname of Northampton town&#039;s rugby union club?",
+            "correct_answer": "Saints",
+            "incorrect_answers": [
+                "Harlequins",
+                "Saracens",
+                "Wasps"
+            ]
+        },
+        {
+            "category": "Geography",
+            "type": "multiple",
+            "difficulty": "easy",
+            "question": "What is the capital of Indonesia?",
+            "correct_answer": "Jakarta",
+            "incorrect_answers": [
+                "Bandung",
+                "Medan",
+                "Palembang"
+            ]
+        },
+        {
+            "category": "Vehicles",
+            "type": "multiple",
+            "difficulty": "easy",
+            "question": "Which Italian city is home of the car manufacturer &#039;Fiat&#039;?",
+            "correct_answer": "Turin",
+            "incorrect_answers": [
+                "Maranello",
+                "Modena",
+                "Rome"
+            ]
+        },
+        {
+            "category": "Entertainment: Japanese Anime & Manga",
+            "type": "multiple",
+            "difficulty": "easy",
+            "question": "Who is the main character with yellow hair in the anime Naruto?",
+            "correct_answer": "Naruto",
+            "incorrect_answers": [
+                "Ten Ten",
+                "Sasuke",
+                "Kakashi"
+            ]
+        },
+        {
+            "category": "Entertainment: Music",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "Who is the frontman of Muse?",
+            "correct_answer": "Matt Bellamy",
+            "incorrect_answers": [
+                "Dominic Howard",
+                "Thom Yorke",
+                "Jonny Greenwood"
+            ]
+        },
+        {
+            "category": "Entertainment: Music",
+            "type": "multiple",
+            "difficulty": "hard",
+            "question": "Which album was released by Kanye West in 2013?",
+            "correct_answer": "Yeezus",
+            "incorrect_answers": [
+                "My Beautiful Dark Twisted Fantasy",
+                "The Life of Pablo",
+                "Watch the Throne"
+            ]
+        },
+        {
+            "category": "Entertainment: Video Games",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "Which of the following colors does the Zombie eyes glow in the &quot;Nuketown&quot; map in &quot;Call of Duty: Black Ops II&quot; Zombies mode?",
+            "correct_answer": "Yellow and Blue",
+            "incorrect_answers": [
+                "Yellow and Red",
+                "Red and Blue",
+                "Blue and White"
+            ]
+        },
+        {
+            "category": "Entertainment: Film",
+            "type": "multiple",
+            "difficulty": "hard",
+            "question": "Which of the following films was directed by Ivan Reitman, written by Gary Ross, featured Kevin Kline, and was released in 1993?",
+            "correct_answer": "Dave",
+            "incorrect_answers": [
+                "John",
+                "Will",
+                "Carl"
+            ]
+        },
+        {
+            "category": "Entertainment: Video Games",
+            "type": "multiple",
+            "difficulty": "medium",
+            "question": "Which of these roles in Town of Salem is mafia?",
+            "correct_answer": "Disguiser",
+            "incorrect_answers": [
+                "Escort",
+                "Lookout",
+                "Transporter"
+            ]
+        }
+    ]
+}

@@ -29,62 +29,6 @@ def my_logger(message=""):
     #     f.write("{}\t{}\n".format(datetime.today(), message))
     pass
 
-class SessionList_p(tk.Frame):
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
-        font = tkFont.Font(family="Helvetica", size=76, weight="bold")
-        font_for_list = tkFont.Font(family="Helvetica", size=16, weight="bold")
-        
-        # w = self.winfo_screenwidth() -40
-        h = self.winfo_screenheight() -40
-
-        fh = round((h - 330)/10)
-        # fw = round((((w - 126)-20)/8)/2)
-        self.controller = controller
-
-        self.sessions = os.listdir("logs")
-
-        self.lst = Label(self, text="Sessions", font=font)
-        self.lst.grid(row=0, column=0, padx=100, pady=100)
-
-        self.banner = Label(self, text="Select Session to View ->", font=font_for_list)
-        self.banner.grid(row=1, column=0, padx=100, pady=100)
-
-        self.server_list = Listbox(self, bg="#ffffff",
-                                   fg= "#000000", font=font_for_list, height=10, width=20)
-        self.server_list.grid(row=0, column=1, padx=2, rowspan=2, sticky=E+W+N+S)
-
-        # Onselect Event
-        self.server_list.bind('<<ListboxSelect>>', self.onselect)
-
-        scr = Scrollbar(self)
-        scr.grid(row=0, column=2, sticky=E+W+N+S)
-
-        # Contecting to the listbox
-        scr.config(command=self.server_list.yview)
-        self.server_list.config(yscrollcommand=scr.set)
-        # Fetching Server List from File
-
-        for line in self.sessions*10:
-            self.server_list.insert(END, line.strip())
-
-        self.next = Button(self, text="More", width=40, border=0, bg="#524136", height=20)
-        self.next.grid(row=3, column=1, padx=10, pady=10)
-
-        
-    def command_frame(self):
-        print("Clickes found")
-
-
-    def onselect(self, event):
-        print("on select")
-        w = event.widget
-        index = int(w.curselection()[0])
-        value = w.get(index)
-        print('You selected item "%s"' % (value))
-        var.SESSION = value
-
-
 class SessionList(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
@@ -378,7 +322,7 @@ class ResultAnalysia(tk.Frame):
 
                 # Adding code for highlight Code on the output
                 # read csv file
-                with open(r"logs\\session_1\\192.168.5.1\\res\\result.csv") as cf:
+                with open(f"logs/{var.SESSION}/{var.SERVER}/res/result.csv") as cf:
                     reader = csv.reader(cf)
                     for i in reader:
                         if len(i) > 0 and value in i[1]:
@@ -477,3 +421,15 @@ if __name__ == "__main__":
     app.mainloop()
     sys.exit()
 
+'''
+#######################
+#######################
+#######################
+***********************
+**********/-\**********
+*********| * |*********
+**********\-/**********
+#######################
+#######################
+#######################
+'''
